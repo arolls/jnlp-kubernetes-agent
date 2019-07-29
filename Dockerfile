@@ -28,5 +28,11 @@ RUN curl -o vault.zip https://releases.hashicorp.com/vault/1.1.0/vault_1.1.0_lin
     mv vault /usr/local/bin/
 RUN curl -fL https://getcli.jfrog.io | sh && \
     mv jfrog /usr/local/bin/
+RUN wget https://packages.cloud.google.com/apt/doc/apt-key.gpg && \
+    apt-key add apt-key.gpg && \
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update && \
+    apt-get install -y kubectl && \
+    mkdir /root/.kube
 VOLUME ["/git"]
 WORKDIR /git
